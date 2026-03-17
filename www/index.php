@@ -8,12 +8,12 @@
 </head>
 
 <body>
-    
+
 <?php if (isset($_SESSION['username'])): ?>
     <p>Данные из сессии:</p>
     <ul>
         <li>Имя: <?= $_SESSION['username'] ?></li>
-        <li>Количество блюд: <?= $_SESSION['count_order'] ?></li>
+        <li>Количество блюд: <?= $_SESSION['theme'] ?></li>
     </ul>
 <?php else: ?>
     <p>Данных пока нет.</p>
@@ -43,6 +43,29 @@ $info = UserInfo::getInfo();
 ?>
 <h3>Информация о пользователе:</h3>
 <p>Данные успешно загружены (скрыто для приватности).</p>
+
+<?php
+require 'db.php';
+require 'Student.php';
+
+$order = new Student($pdo);
+$all = $order->getAll();
+?>
+
+<h2>Сохранённые данные:</h2>
+<ul>
+<?php foreach ($all as $row): ?>
+    <li>
+        <strong><?= htmlspecialchars($row['username']) ?></strong> |
+        Ресторан: <?= htmlspecialchars($row['theme']) ?> |
+        Блюд: <?= htmlspecialchars($row['age']) ?> |
+        Оплата онлайн: <?= $row['prize'] ? 'Да' : 'Нет' ?> |
+        Коробка: <?= $row['difficulty'] === 'c' ? 'Легко' : 'Сложно' : 'ПМ' ?>
+    </li>
+<?php endforeach; ?>
+</ul>
+
+<a href="form.html">Заполнить форму</a>
 
 </body>
 </html>
