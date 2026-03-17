@@ -19,7 +19,7 @@
 Клонировать репозиторий:
 ```
 git clone https://github.com/mrsalute39/web_lab_5
-cd nginx-lab-5
+cd web_lab_5
 ```
 Запустить контейнеры:
 
